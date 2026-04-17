@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EverVow | Sustainable Luxury Secondhand Bridal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">EverVow</div>
+                <div class="nav-links">
+                    <a href="#how-it-works">Process</a>
+                    <a href="#partners">Partners</a>
+                    <a href="#join" class="btn-secondary">Join Waitlist</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>The something old, expertly made new.</h1>
+                    <p class="subtitle">A curated marketplace for designer secondhand wedding dresses, vertically integrated with master tailors for a guaranteed fit.</p>
+                    <div class="cta-group">
+                        <a href="#join" class="btn-primary">Find Your Gown</a>
+                        <a href="#partners" class="btn-outline">Become a Partner</a>
+                    </div>
+                </div>
+                <div class="hero-image-container">
+                    <img src="images/a-vintage-inspired-editorial-photo-of-a-.png" alt="Vintage wedding dress in a tailor studio" class="hero-image">
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="features">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">The EverVow Standard</span>
+                    <h2>A bridge between heritage craftsmanship and modern resale.</h2>
+                    <hr class="thick-rule">
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Certified Fit</h3>
+                        <p>Every gown listed is vetted by our authorized alteration partners. No more "no return" anxiety—we ensure the dress can be tailored to your body before you commit.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Curated Supply</h3>
+                        <p>We source directly from premium sellers and the "unclaimed" inventory of high-end boutiques, bringing you designers like Grace Loves Lace and Sarah Seven at 40-60% off retail.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Tailor-Led</h3>
+                        <p>Our partners aren't just drop-off points; they are regional trust anchors. From fit verification to complex structural redesign, your dress is in master hands.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="partners" class="partners-preview">
+            <div class="container">
+                <div class="split-layout">
+                    <div class="text-block">
+                        <span class="eyebrow">Our Network</span>
+                        <h2>Authorized Alteration Partners</h2>
+                        <p>We've launched in NYC, LA, and Chicago with 15 master tailor shops that serve as EverVow supply nodes and fit centers.</p>
+                        <a href="#join" class="btn-text">View all locations &rarr;</a>
+                    </div>
+                    <div class="stats-block">
+                        <div class="stat-item">
+                            <span class="stat-value">15</span>
+                            <span class="stat-label">Anchor Shops</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">$1k+</span>
+                            <span class="stat-label">Avg. Savings</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="join" class="waitlist-section">
+            <div class="container">
+                <div class="form-container">
+                    <h2>Join the intentional bridal movement.</h2>
+                    <p>Be the first to know when we launch our national "Buy & Fit" experience in Summer 2026.</p>
+                    
+                    <form id="waitlist-form">
+                        <div class="input-group">
+                            <input type="email" id="email" name="email" placeholder="Your email address" required>
+                            <select id="user_type" name="user_type" required>
+                                <option value="" disabled selected>I am a...</option>
+                                <option value="buyer">Bride looking to buy</option>
+                                <option value="seller">Bride looking to sell</option>
+                                <option value="partner">Alteration Professional</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-primary full-width">Secure Early Access</button>
+                    </form>
+                    <div id="form-response" class="hidden">
+                        <p>Thank you. Your place in line is reserved. We'll be in touch soon.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">EverVow</div>
+                <p>&copy; 2026 EverVow Marketplace. Sustainable luxury for the modern bride.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const waitlistForm = document.getElementById('waitlist-form');
+        const formResponse = document.getElementById('form-response');
+
+        waitlistForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(waitlistForm);
+            const data = {
+                email: formData.get('email'),
+                user_type: formData.get('user_type')
+            };
+
+            try {
+                const response = await fetch('https://baget.ai/api/public/databases/bdf9c4a5-7e10-4874-84e2-75d5eb07edf9/rows', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ data }),
+                });
+
+                if (response.ok) {
+                    waitlistForm.classList.add('hidden');
+                    formResponse.classList.remove('hidden');
+                } else {
+                    alert('Something went wrong. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Connection error. Please try again later.');
+            }
+        });
+    </script>
+</body>
+</html>
