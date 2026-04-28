@@ -55,7 +55,7 @@
                 e.preventDefault();
                 setLoading(true);
                 try {
-                    const res = await fetch('https://baget.ai/api/public/databases/bdf9c4a5-7e10-4874-84e2-75d5eb07edf9/rows', {
+                    const res = await fetch('https://app.baget.ai/api/public/databases/bdf9c4a5-7e10-4874-84e2-75d5eb07edf9/rows', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ data: { email, user_type: type } }),
